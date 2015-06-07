@@ -46,10 +46,18 @@ group :development, :test do
   	gem 'rspec-rails', '~> 2.14.1'
   	gem 'spring-commands-rspec'
   	gem 'guard-rspec'
+    gem 'fabrication', '~> 2.11.3'
+    
   end
 
   group :test do
   	gem 'capybara', '~> 2.4.1'
+    gem 'faker'
 	end
+
+  group :development do
+    gem 'pry', '~> 0.10.1'
+    gem 'pry-nav', '~> 0.2.4'
+  end
 end
 
