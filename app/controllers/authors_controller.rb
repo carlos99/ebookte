@@ -28,19 +28,16 @@ class AuthorsController < ApplicationController
     end
 
     def update
-  
     	if @author.update(author_params)
     		flash[:success] ='Author has been updated'
     		redirect_to @author
     	else
     		flash[:danger] = 'Author has not been updated'
     		render :edit
-    		
     	end
     end
 
     def destroy
-  
     	if @author.destroy
     		flash[:success] = 'Author has been deleted'
     		redirect_to authors_path
