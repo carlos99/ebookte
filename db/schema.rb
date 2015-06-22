@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612051115) do
+ActiveRecord::Schema.define(version: 20150622023336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,30 @@ ActiveRecord::Schema.define(version: 20150612051115) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "books", force: :cascade do |t|
+    t.string   "title"
+    t.string   "isbn",         limit: 13
+    t.text     "description"
+    t.date     "published_at"
+    t.integer  "publisher_id"
+    t.integer  "page_count"
+    t.decimal  "price",                   precision: 16, scale: 2
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  add_index "books", ["publisher_id"], name: "index_books_on_publisher_id", using: :btree
+
+  create_table "publications", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "publications", ["author_id"], name: "index_publications_on_author_id", using: :btree
+  add_index "publications", ["book_id"], name: "index_publications_on_book_id", using: :btree
+
   create_table "publishers", force: :cascade do |t|
     t.string   "name",       limit: 50
     t.datetime "created_at",            null: false
@@ -31,4 +55,5 @@ ActiveRecord::Schema.define(version: 20150612051115) do
 
   add_index "publishers", ["name"], name: "index_publishers_on_name", unique: true, using: :btree
 
+  add_foreign_key "books", "publishers"
 end

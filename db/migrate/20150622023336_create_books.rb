@@ -6,7 +6,7 @@ class CreateBooks < ActiveRecord::Migration
       t.text :description
       t.date :published_at
       t.references :publisher, index: true
-      t.intger :page_count
+      t.integer :page_count
       t.decimal :price, precision: 16, scale: 2
 
       t.timestamps null: false
